@@ -1,0 +1,11 @@
+#!/bin/env sh
+
+# if the argument is a file, copy to the right location and update the wallpaper
+[ -f "$1" ] && cp "$1" ~/.config/wallpaper.png && notify-send "Wallpaper changed"
+
+# if the argument is a directory, randomly select one file (*.png/*.jpg),
+# copy it to the right location and update the wallpaper.
+[ -d "$1" ] && cp "$(find $1 -name "*.png" -o -name "*jpg" -type f | shuf -n 1)" ~/.config/wallpaper.png && notify-send "Wallpaper changed"
+
+# set the wallpaper using wal
+wal -i ~/.config/wallpaper.png
